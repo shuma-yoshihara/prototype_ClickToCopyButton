@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .test-wrapper {
+      border: 1px solid #999;
+      padding: 20px;
+      margin-bottom: 20px;
+      width: 480px;
+      margin-inline: auto;
+    }
+
+    .copyText {
+      outline: none;
+      border: none;
+    }
+
+    .test {
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-wrapper">
+    <div class="copy-container">
+      <input type="text" class="copyText" value="123098" readonly />
+      <button class="copyButton" onclick="copyToClipboard(this)">
+        copy
+      </button>
+    </div>
+    <div>
+      <p>コピーしたテキストを貼り付けて下さい</p>
+      <input type="text" />
+    </div>
+  </div>
+  <div class="test-wrapper">
+    <div class="copy-container">
+      <p>何かしらの理由でフロントに情報が設置されなかった場合</p>
+      <input type="text" readonly />
+      <button class="copyButton" onclick="copyToClipboard(this)">
+        copy
+      </button>
+    </div>
+  </div>
+  <script>
+  function copyToClipboard(obj) {
+    const element = obj.previousElementSibling;
+    const button = document.querySelector('.copyButton')
+    if (navigator.clipboard && !element.value == false) {
+      navigator.clipboard.writeText(element.value);
+      button.innerHTML = 'copyされました'
+      const a = button.classList.add("test");
+      const b = setTimeout(() => {
+        if (button.classList.contains("test")) {
+          button.classList.remove('test')
+        }
+        button.innerHTML = 'copy'
+      }, 5000)
+
+    } else {
+      alert("コピーされませんでした！");
+    }
+  }
+</script>
+</body>
+</html>
